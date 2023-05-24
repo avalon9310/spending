@@ -8,7 +8,7 @@ class Spend(models.Model):
     title = models.CharField(max_length=100)
     text = models.TextField(blank=True)
     Creation_date = models.DateField(null=True, blank=True)
-    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    amount = models.IntegerField()
     category_choices = [
         ('Meals', '餐飲費'),
         ('transportation', '交通'),
@@ -18,3 +18,6 @@ class Spend(models.Model):
     ]
     category = models.CharField(max_length=20, choices=category_choices)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'{self.id}-{self.title}'
