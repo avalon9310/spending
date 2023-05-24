@@ -19,6 +19,6 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('',views.spend,name='spend'),
-    
+    path('',views.spending,name='spending'),
+    path('spend/<int:id>',views.spend,name='spend'),
 ]

@@ -1,11 +1,16 @@
 {% extends 'base.html' %}
 {% block title %}
-主頁面
+事項頁面
 {% endblock %}
 {% block content %}
-<h1>Spend</h1>
-{% for spend in spends %}
-<li><span style="color: coral;">[{{spend.Creation_date}}]</span>{{spend.title}},{{spend.amount}}元
-    ({{spend.get_category_display }})</li>
-{% endfor %}
+{% if spend %}
+<h2>{{spend.title}}
+    {{spend.amount}}元
+</h2>
+<hr>
+<li>{{spend.text}}</li>
+<li>{{spend.Creation}}</li>
+{% else %}
+無此內容
+{% endif %}
 {% endblock %}
