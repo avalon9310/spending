@@ -41,6 +41,7 @@
         Login:
         <a href="{% url 'profile' user.id %}">{{user.username}}</a>
         <a href="{% url 'logout' %}">登出</a>
+        <a href="{% url 'create-spend' %}">建立記帳事項</a>
         {% else %}
         <a href="{% url 'login' %}">登入</a>
         <a href="{% url 'register' %}">註冊</a>
