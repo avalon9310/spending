@@ -8,8 +8,15 @@
     {{spend.amount}}元
 </h2>
 <hr>
-<li>{{spend.text}}</li>
+<li style="white-space: pre-line;list-style-type: none;">{{spend.text}}</li>
 <li>{{spend.Creation}}</li>
+<hr>
+<form action="" method="POST">
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type="submit" value="更新" name="update">
+    <input type="submit" value="刪除" name="delete" onclick="return confirm('確定刪除?')">
+</form>
 {% else %}
 無此內容
 {% endif %}
