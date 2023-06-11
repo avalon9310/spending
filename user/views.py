@@ -57,6 +57,7 @@ def user_register(request):
     if request.method=='POST':
         try:
             username=request.POST.get('username')
+            email=request.POST.get('email')
             password1=request.POST.get('password1')
             password2=request.POST.get('password2')
             print(username,password1,password2)
