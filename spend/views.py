@@ -6,6 +6,13 @@ from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 @login_required
+def delete_spend(request,id):
+    spend=Spend.objects.get(pk=id)
+    spend.delete()
+
+    return redirect('spending')
+
+@login_required
 def create_spend(request):
     message=''
     form=SpendForm()

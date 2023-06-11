@@ -22,5 +22,6 @@ urlpatterns = [
     path('',views.spending,name='spending'),
     path('spend/<int:id>',views.spend,name='spend'),
     path('create/',views.create_spend,name='create-spend'),
+    path('delete-spend/<int:id>',views.delete_spend,name='delete-spend'),
 
 ]

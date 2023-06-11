@@ -4,10 +4,15 @@
 {% endblock %}
 {% block content %}
 <h1>Spend</h1>
-{% for spend in spends %}
-<li><span style="color: coral;">[{{spend.Creation}}]</span>
+{% for spend in spends|dictsort:"Creation_date" %}
+<li><span style="color: coral;">[{{spend.Creation_date}}]</span>
     <a href="{% url 'spend' spend.id %}" style="text-decoration: underline;">{{spend.title}}</a>{{spend.amount}}元
     ({{spend.get_category_display }})
 </li>
+<form action="{% url 'delete-spend' spend.id %}" style="display: inline;">
+    <button type="submit" onclick="return confirm('是否刪除?')">刪除</button>
+</form>
+
+
 {% endfor %}
 {% endblock %}
