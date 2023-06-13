@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>
+
         {% block title %}
         {% endblock %}
     </title>
@@ -22,14 +23,33 @@
             color: blue;
         }
 
-        .title {
+        .field label {
+            font-size: 18px;
+            /* 调整标签的字体大小 */
+        }
+
+        .field .input {
+            font-size: 16px;
+            /* 调整输入框的字体大小 */
+        }
+
+        .spend-item {
+            margin-top: 30px;
+            margin-bottom: 10px;
+        }
+
+        /* .title {
             background-color: rgb(233, 174, 24);
             padding: 3px 6px;
             border-radius: 3px;
             margin-left: -6px;
             margin-right: 6px;
-        }
+        } */
     </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css" />
+    {% block css %}
+
+    {% endblock %}
 </head>
 
 <body>
@@ -49,7 +69,6 @@
         {% endif %}
     </div>
     {% block content %}
-
     {% endblock %}
     <p style="color: red;">
         {{message}}

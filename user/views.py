@@ -70,7 +70,7 @@ def user_register(request):
                 if User.objects.filter(username=username).exists():
                     message='帳號重複'
                 else:
-                    user=User.objects.create_user(username=username,password=password1)
+                    user=User.objects.create_user(username=username,password=password1,email=email)
                     user.save()
                     login(request,user)
                     message='註冊成功'

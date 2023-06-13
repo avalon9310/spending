@@ -90,6 +90,7 @@ DATABASES = {
     'NAME': 'spending',
     'USER': 'avalon',
     'PASSWORD': '12345678',
+    #'HOST': '127.0.0.1',
     #'HOST': 'localhost',
     'HOST': 'database-3.c0y3lgknejqp.ap-northeast-1.rds.amazonaws.com',
     'PORT': '3306',
