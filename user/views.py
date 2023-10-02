@@ -62,7 +62,13 @@ def user_register(request):
             password2=request.POST.get('password2')
             print(username,password1,password2)
 
-            if len(password1)<8:
+            if username=='':
+                message='請輸入帳號'
+            elif password1=='':
+                message='請輸入密碼'
+            elif password2=='':
+                message='請再次輸入密碼'
+            elif len(password1)<8:
                 message='密碼過短'
             elif password1!=password2:
                 message='兩次密碼不同'
