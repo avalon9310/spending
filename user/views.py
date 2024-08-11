@@ -30,7 +30,7 @@ def user_login(request):
             username=request.POST.get('username')
             password=request.POST.get('password')
             if username=='' or password=='':
-                message='帳號跟密碼不能為空'
+                message='帳號或密碼不能為空'
             else:
                 #登入動作
                 user=authenticate(request,username=username,password=password)
@@ -69,7 +69,7 @@ def user_register(request):
             elif password2=='':
                 message='請再次輸入密碼'
             elif len(password1)<8:
-                message='密碼過短'
+                message='密碼需至少8碼'
             elif password1!=password2:
                 message='兩次密碼不同'
             else:
