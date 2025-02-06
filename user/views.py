@@ -3,6 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse
 
 
 @login_required
@@ -30,16 +31,16 @@ def user_login(request):
             username=request.POST.get('username')
             password=request.POST.get('password')
             if username=='' or password=='':
-                message='帳號或密碼不能為空'
+                message='帳號或密碼不能為空!'
             else:
                 #登入動作
                 user=authenticate(request,username=username,password=password)
                 print(user)
                 if not user:
                     if User.objects.filter(username=username):
-                        message='密碼錯誤'
+                        message='密碼錯誤!'
                     else:
-                        message='帳號錯誤'
+                        message='帳號錯誤!'
                 else:
                     login(request,user)
                     message='登入成功'
@@ -69,12 +70,12 @@ def user_register(request):
             elif password2=='':
                 message='請再次輸入密碼'
             elif len(password1)<8:
-                message='密碼需至少8碼'
+                message='密碼需至少8碼!'
             elif password1!=password2:
-                message='兩次密碼不同'
+                message='兩次密碼不同!'
             else:
                 if User.objects.filter(username=username).exists():
-                    message='帳號重複'
+                    message='此帳號已註冊!'
                 else:
                     user=User.objects.create_user(username=username,password=password1,email=email)
                     user.save()

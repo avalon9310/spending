@@ -7,6 +7,13 @@ import sys
 def main():
     """Run administrative tasks."""
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'spending.settings')
+
+    # 加入 migrate 指令
+    import django
+    from django.core.management import call_command
+
+    django.setup()
+    call_command('migrate')  # 自動執行 migrate
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:

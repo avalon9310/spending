@@ -12,7 +12,7 @@ SECRET_KEY = 'django-insecure-*g+mbq2(l6m19ul1+a@pg%+uy_sxazyut%=$*4xp+opn%j2rj+
 DEBUG = True  # 設定為 True 以獲取更多錯誤訊息
 
 ALLOWED_HOSTS = ['*']
-
+PORT = os.getenv("PORT", "8000")
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -54,8 +54,15 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'spending.wsgi.application'
+database_url = os.getenv("DATABASE_URL")
 
-tmpPostgres = urlparse(os.getenv("DATABASE_URL"))
+if database_url is None:
+    raise ValueError("環境變數 DATABASE_URL 未設定，請確認 Render 環境變數")
+if isinstance(database_url, bytes):
+    database_url = database_url.decode("utf-8")  # 轉換 bytes 為 str
+
+tmpPostgres = urlparse(database_url)
+
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.sqlite3',
@@ -78,7 +85,7 @@ tmpPostgres = urlparse(os.getenv("DATABASE_URL"))
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': tmpPostgres.path.replace('/', ''),
+        'NAME': tmpPostgres.path[1:],
         'USER': tmpPostgres.username,
         'PASSWORD': tmpPostgres.password,
         'HOST': tmpPostgres.hostname,

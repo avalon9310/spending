@@ -5,6 +5,8 @@ from .forms import SpendForm
 from django.contrib.auth.decorators import login_required
 # Create your views here.
 
+
+
 @login_required
 def delete_spend(request,id):
     spend=Spend.objects.get(pk=id)
