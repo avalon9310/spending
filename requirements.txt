@@ -9,7 +9,7 @@ psycopg2-binary==2.9.9
 python-dotenv==1.0.1
 requests==2.31.0
 sqlparse==0.5.3
-typing-extensions==4.12.2
+typing_extensions==4.12.2
 tzdata==2025.1
 urllib3==2.0.2
 whitenoise==6.7.0
