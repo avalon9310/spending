@@ -55,20 +55,23 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'spending.wsgi.application'
 database_url = os.getenv("DATABASE_URL")
-
-if database_url is None:
-    raise ValueError("環境變數 DATABASE_URL 未設定，請確認 Render 環境變數")
-if isinstance(database_url, bytes):
-    database_url = database_url.decode("utf-8")  # 轉換 bytes 為 str
-
-tmpPostgres = urlparse(database_url)
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
+tmpPostgres = urlparse(os.getenv("DATABASE_URL"))
+# 如果環境變數 DATABASE_URL 沒設定，則改用 SQLite
+# if not database_url:
+#     print("未設定 DATABASE_URL，使用 SQLite 代替")
+#     DATABASES = {
+#         'default': {
+#             'ENGINE': 'django.db.backends.sqlite3',
+#             'NAME': BASE_DIR / 'db.sqlite3',
+#         }
 #     }
-# }
+# else:
+#     if isinstance(database_url, bytes):
+#         database_url = database_url.decode("utf-8")  # 轉換 bytes 為 str
+
+#     DATABASES = {
+#         'default': dj_database_url.config(default=database_url, conn_max_age=600)
+#     }
 
 
 # DATABASES = {
