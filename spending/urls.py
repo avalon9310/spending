@@ -19,14 +19,15 @@ from django.urls import path,include
 from user import views
 from django.conf.urls.static import static
 from . import settings
-from user.views import create_admin_user
+
+
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('user/',include('user.urls')),
     path('',include('spend.urls')),
-    path('create_admin/', create_admin_user, name='create_admin'),
+    
 ]
 
 urlpatterns += static(settings.STATIC_URL,

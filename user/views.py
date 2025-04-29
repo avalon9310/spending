@@ -5,11 +5,6 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 
-def create_admin_user(request):
-    if not User.objects.filter(username="mall_admin").exists():
-        User.objects.create_superuser("mall_admin", "mall@example.com", "mallpassword")
-        return HttpResponse("Superuser mall_admin created successfully!")
-    return HttpResponse("Superuser already exists!")
 
 @login_required
 def user_logout(request):
