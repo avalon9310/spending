@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}
+事項頁面
+{% endblock %}
+{% block content %}
+{% if spend %}
+<h6>{{spend.title}}
+    {{spend.amount}}元
+</h6>
+<hr>
+<li style="white-space: pre-line;list-style-type: none;">{{spend.text}}</li>
+<li>{{spend.Creation}}</li>
+<hr>
+<form action="" method="POST">
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type="submit" class="button is-warning" value="更新" name="update">
+    <input type="submit" class="button is-danger" value="刪除" name="delete" onclick="return confirm('確定刪除?')">
+</form>
+{% else %}
+無此內容
+{% endif %}
+{% endblock %}
