@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %}
+使用者
+{% endblock %}
+{% block content %}
+<div class="hero is-info is-fullheight-with-navbar">
+    <div class="hero-body">
+        <div class="container is-vcentered">
+            <div class="columns is-centered">
+                <div class="column is-6 box">
+                    <div class="field">
+                        <label class="label has-text-centered is-size-3"> 個人資訊 </label>
+                        <hr />
+                        {% if user.is_authenticated %}
+                        <div class="is-size-4 has-text-centered">
+                            {{user.username}}
+                            <hr>
+                            <div class="is-size-6 has-text-white has-background-success has-text-black box">
+                                <h2>信箱:{{user.email}}</h2>
+                                <h2>加入日期:{{user.date_joined}}</h2>
+                                <h2>最後登入日期:{{user.last_login}}</h2>
+                            </div>
+                        </div>
+                        {%endif%}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

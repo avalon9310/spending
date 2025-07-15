@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block title %}
+主頁面
+{% endblock %}
+
+{% block content %}
+    {% if user.is_authenticated %}
+        <h2>記帳總覽</h2>
+
+        <!-- 年份篩選表單 -->
+        <form method="POST">
+            {% csrf_token %}
+            <label>選擇年份：</label>
+            <select name="year" id="year" onchange="this.form.submit()">
+                {% for year in years %}
+                    {%if year_now == year %}
+                        <option value="{{ year }}" selected>{{ year }}</option>
+                    {% else %}
+                        <option value="{{ year }}">{{ year }}</option>
+                    {%endif %}
+                {% endfor %}
+            </select>
+            <label for="category">選擇類型：</label>
+            <select name="category" id="category" onchange="this.form.submit()">
+                <option value="all" {% if selected_category == 'all' %}selected{% endif %}>所有類型</option>
+                {% for code, label in categories %}
+                    <option value="{{ code }}" {% if selected_category == code %}selected{% endif %}>{{ label }}</option>
+                {% endfor %}
+            </select>
+        </form>
+        
+
+        <!-- 顯示該年總花費 -->
+        <h3>總花費：{{ total_amount }} 元</h3>
+        <ul>
+            {% for spend in spends|dictsort:"Creation_date" %}
+            <li class="spend-item">
+                <span style="color: coral;">[{{ spend.Creation_date }}]</span>
+                <a href="{% url 'spend' spend.id %}" style="text-decoration: underline;">{{ spend.title }}</a> 
+                {{ spend.amount }} 元 ({{ spend.get_category_display }})
+
+                <form action="{% url 'spend' spend.id %}" style="display: inline;">
+                    <button type="submit" class="button is-warning">檢視</button>
+                </form>
+                <form action="{% url 'delete-spend' spend.id %}" style="display: inline;">
+                    <button type="submit" class="button is-danger" onclick="return confirm('是否刪除?')">刪除</button>
+                </form>
+            </li>
+            {% empty %}
+            <li>本年度尚無記錄</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>請先登入以查看記帳資料</p>
+    {% endif %}
+{% endblock %}
