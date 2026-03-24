@@ -6,10 +6,10 @@
 
 {% block content %}
     {% if user.is_authenticated %}
-        <h2>記帳總覽</h2>
+        <h2 style="text-align: center;">記帳總覽</h2>
 
         <!-- 年份篩選表單 -->
-        <form method="POST">
+        <form method="POST" style="text-align: center;">
             {% csrf_token %}
             <label>選擇年份：</label>
             <select name="year" id="year" onchange="this.form.submit()">
@@ -32,8 +32,8 @@
         
 
         <!-- 顯示該年總花費 -->
-        <h3>總花費：{{ total_amount }} 元</h3>
-        <ul>
+        <h3 style="text-align: center;">總花費：{{ total_amount }} 元</h3>
+        <ul style="text-align: center;list-style-position: inside;">
             {% for spend in spends|dictsort:"Creation_date" %}
             <li class="spend-item">
                 <span style="color: coral;">[{{ spend.Creation_date }}]</span>
@@ -52,6 +52,6 @@
             {% endfor %}
         </ul>
     {% else %}
-        <p>請先登入以查看記帳資料</p>
+        <p style="text-align: center;">請先登入以查看記帳資料</p>
     {% endif %}
 {% endblock %}
